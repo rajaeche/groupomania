@@ -1,0 +1,101 @@
+@font-face {
+    font-family: "Lato";
+    src:url(./fonts/Lato/Lato-Regular.ttf);
+  }
+
+
+$main: #FD2D01;
+$main-light: #FFD7D7;
+$main-dark: #4E5166;
+$main-lighter: #fff6f6;
+
+$thin: 300;
+$normal: 400;
+$bold: 600;
+$br: 4px;
+
+
+$gray-light: #a0b3b0;
+$gray: #ddd;
+
+$dark: #13232f;
+$white: #ffffff;
+
+$font: 'Lato', sans-serif;
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    outline: none;
+    border: none;
+    text-decoration: none;
+  
+    &::selection {
+      background: $gray-light;
+    }
+  }
+  a,
+  a:visited {
+    color: $main;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  input,
+  textarea {
+    resize: none;
+    border-radius: 20px;
+    width: 270px;
+  }
+  textarea {
+    &:focus {
+      box-shadow: 0 0 4px rgba(0, 22, 44, 0.1);
+    }
+  }
+  button,
+  input[type="submit"] {
+    background: $main;
+    color: $white;
+    cursor: pointer;
+    transition: 0.2s;
+    margin: 0;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    border-radius: 20px 6px 20px 20px;
+  
+    &:hover {
+      background: $white;
+      color: $main-dark;
+    }
+  }
+  input[type="checkbox"] {
+    box-shadow: none;
+    width: 20px;
+    margin: 10px 0;
+  }
+  i {
+    transition: 0.15s;
+  
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  body {
+    font-family: $font;
+    line-height: 1.4rem;
+    // background: lighten($color: $main-light, $amount: 6);
+    color: $dark;
+
+  }
+  .error {
+    color: red;
+    font-weight: bold;
+  }
+  .success {
+    color: green;
+    font-weight: bold;
+  }
