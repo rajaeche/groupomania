@@ -58,6 +58,8 @@ module.exports.createPost = async (req, res) => {
     }
 }
 
+// ajouter secu admin
+
 module.exports.updatePost = (req, res) => {
     if (!ObjectID.isValid(req.params.id))
         return res.status(400).send('ID unknown : ' + req.params.id)

@@ -28,15 +28,12 @@ module.exports.checkUser = (req, res, next) => {
 // locals: info de user qui transitent. si il n'y a pas de token les locals ne sont pas transmises
 
 module.exports.requireAuth = (req, res, next) => {
-    const userAdmin = UserModel.findOne({ admin: true })
-    console.log('userAdmin', userAdmin)
     const token = req.cookies.jwt
     if (token) {
         jwt.verify(
             token,
             process.env.TOKEN_SECRET,
             async (err, decodedToken) => {
-                console.log('decoded token', decodedToken)
                 if (err) {
                     res.send(200).json('no token')
                 } else {

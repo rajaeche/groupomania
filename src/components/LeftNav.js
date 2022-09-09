@@ -13,7 +13,7 @@ const LeftNav = () => {
                         <img src="/assets/user.svg" alt="user" />
                     </NavLink>
                     <NavLink to="/discovery" id="discovery">
-                        <img src="/assets/rocket.svg" alt="rocket" />
+                        <img src="/assets/circle.svg" alt="circle" />
                     </NavLink>
                 </div>
             </div>

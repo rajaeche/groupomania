@@ -8,14 +8,14 @@ import Thread from '../components/Thread'
 function Profil() {
     const uid = useContext(UidContext)
     return (
-        <div className="profil-page">
+        <section className="profil-page">
             {uid ? (
                 <>
                     <UpadeteProfil />
-                    <div className="thread-container">
+                    <article className="profil-post">
                         <NewPostForm />
-                        <Thread posterId />
-                    </div>
+                        <Thread />
+                    </article>
                 </>
             ) : (
                 <div className="page-container">
@@ -27,7 +27,7 @@ function Profil() {
                     </div>
                 </div>
             )}
-        </div>
+        </section>
     )
 }
 

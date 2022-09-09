@@ -3,9 +3,20 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const userRoutes = require('./routes/user')
 const postRoutes = require('./routes/post')
-require('./config/db')
 require('dotenv').config({ path: './config/.env' })
 const { checkUser, requireAuth } = require('./middleware/auth')
+
+const mongoose = require('mongoose')
+
+const uri = `mongodb://${process.env.USER_NAME}:${process.env.PASSWORD}@ac-cztgqs9-shard-00-00.wehshrb.mongodb.net:27017,ac-cztgqs9-shard-00-01.wehshrb.mongodb.net:27017,ac-cztgqs9-shard-00-02.wehshrb.mongodb.net:27017/?ssl=true&replicaSet=atlas-y7op3t-shard-0&authSource=admin&retryWrites=true&w=majority`
+
+mongoose
+    .connect(uri, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then(() => console.log('Connexion à mongoDB réussi!'))
+    .catch((err) => console.log('Connexion à mongoDB échoué!', err))
 
 const cors = require('cors')
 

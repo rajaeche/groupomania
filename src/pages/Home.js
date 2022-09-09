@@ -8,7 +8,7 @@ import NewPostForm from '../components/Post/NewPostForm'
 const Home = () => {
     const uid = useContext(UidContext)
     return (
-        <div className="home">
+        <section className="home">
             {uid ? (
                 <>
                     <LeftNav />
@@ -22,7 +22,7 @@ const Home = () => {
             ) : (
                 <Profil />
             )}
-        </div>
+        </section>
     )
 }
 

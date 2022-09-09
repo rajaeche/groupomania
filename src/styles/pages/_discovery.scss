@@ -1,0 +1,35 @@
+.discovery{
+    display: grid;
+    max-width: 1200px;
+    grid-template-columns: 10% 80%;
+    overflow: hidden;
+    margin-top: 50px;
+    position: relative;
+    .discovery-container{
+        ul{
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
+        .card-container{
+            display: grid;
+    grid-template-columns: 66px 1fr;
+    width: 400px;
+    border: 2px solid $main-light;
+    margin: 10px;
+    padding: 16px;
+    border-radius: 20px;
+    margin: 8px auto;
+    position: relative;
+    min-height: 100px;
+    background-color: $main-lighter;
+    .card-header{
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+    }
+        }
+    }
+}

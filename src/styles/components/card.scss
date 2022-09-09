@@ -382,8 +382,11 @@
         }
       }
       .like-container {
-        .fa-heart{
+        .fa-heart .fa-comment{
           size: 20px;
+        }
+        .liked{
+          color: $main;
         }
         span {
           font-size: 1.02rem;

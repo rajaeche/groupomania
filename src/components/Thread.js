@@ -3,6 +3,8 @@ import { getPosts } from '../actions/post.action'
 import { useDispatch, useSelector } from 'react-redux'
 import Card from './Post/Card'
 import { isEmpty } from './Utils'
+// import Profil from '../pages/Profil'
+// import ProfileCard from './Post/ProfileCard'
 
 const Thread = () => {
     const [loadPost, setLoadPost] = useState(true)
