@@ -5,6 +5,7 @@ const stream = require('stream')
 const pipeline = util.promisify(stream.pipeline)
 const { uploadErrors } = require('../utils/errors')
 
+// add/change profil pic
 module.exports.uploadProfil = async (req, res) => {
     try {
         if (

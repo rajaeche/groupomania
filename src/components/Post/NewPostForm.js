@@ -70,7 +70,7 @@ const NewPostForm = () => {
                 <i className="fas fa-spinner fa-pulse"></i>
             ) : (
                 <>
-                    <NavLink exact to="/profil">
+                    <NavLink to="/profil">
                         <div className="user-info">
                             <img src={userData.picture} alt="user-img" />
                         </div>

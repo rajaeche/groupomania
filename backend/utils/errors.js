@@ -1,3 +1,4 @@
+// handle and show signup errors
 exports.signUpErrors = (err) => {
     const errors = { pseudo: '', email: '', password: '' }
 
@@ -18,6 +19,7 @@ exports.signUpErrors = (err) => {
     return errors
 }
 
+// handle and show login errors
 exports.signInErrors = (err) => {
     const errors = { email: '', password: '' }
 
@@ -29,6 +31,7 @@ exports.signInErrors = (err) => {
     return errors
 }
 
+// handle and show upload errors
 exports.uploadErrors = (err) => {
     const errors = { format: '', maxSize: '' }
 

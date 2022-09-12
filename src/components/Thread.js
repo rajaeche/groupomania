@@ -23,7 +23,7 @@ const Thread = () => {
 
     useEffect(() => {
         if (loadPost) {
-            dispatch(getPosts())
+            dispatch(getPosts)
             setLoadPost(false)
             setCount(count + 5)
         }

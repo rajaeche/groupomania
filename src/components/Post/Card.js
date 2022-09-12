@@ -25,7 +25,6 @@ const Card = ({ post }) => {
     useEffect(() => {
         !isEmpty(usersData[0]) && setIsLoading(false)
     }, [usersData])
-
     return (
         <>
             <li className="card-container" key={post._id}>
@@ -35,16 +34,13 @@ const Card = ({ post }) => {
                     <>
                         <div className="card-left">
                             <img
-                                src={
-                                    !isEmpty(usersData[0]) &&
-                                    usersData
-                                        .map((user) => {
-                                            if (user._id === post.posterId)
-                                                return user.picture
-                                            else return null
-                                        })
-                                        .join('')
-                                }
+                                src={usersData
+                                    .map((user) => {
+                                        if (user._id === post.posterId)
+                                            return user.picture
+                                        else return null
+                                    })
+                                    .join('')}
                                 alt="poster-pic"
                             />
                         </div>
@@ -52,17 +48,11 @@ const Card = ({ post }) => {
                             <div className="card-header">
                                 <div className="pseudo">
                                     <h3>
-                                        {!isEmpty(usersData[0]) &&
-                                            usersData
-                                                .map((user) => {
-                                                    if (
-                                                        user._id ===
-                                                        post.posterId
-                                                    )
-                                                        return user.pseudo
-                                                    else return null
-                                                })
-                                                .join('')}
+                                        {usersData.map((user) => {
+                                            if (user._id === post.posterId)
+                                                return user.pseudo
+                                            else return null
+                                        })}
                                     </h3>
                                 </div>
                                 <span>{dateParser(post.createdAt)}</span>
@@ -122,7 +112,7 @@ const Card = ({ post }) => {
                                             setShowComments(!showComments)
                                         }
                                     >
-                                        <i class="fa-solid fa-comment"></i>
+                                        <i className="fa-solid fa-comment"></i>
                                     </div>
                                     <span>{post.comments.length}</span>
                                 </div>
@@ -133,7 +123,6 @@ const Card = ({ post }) => {
                     </>
                 )}
             </li>
-            {/* )} */}
         </>
     )
 }

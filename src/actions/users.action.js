@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+// users
 export const GET_USERS = 'GET_USERS'
 export const GET_USERS_PICTURE = 'GET_USERS_PICTURE'
 

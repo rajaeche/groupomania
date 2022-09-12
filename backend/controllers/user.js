@@ -1,22 +1,24 @@
 const UserModel = require('../models/User')
 const ObjectId = require('mongoose').Types.ObjectId
 
+// all users
 module.exports.getAllUsers = async (req, res) => {
     const users = await UserModel.find().select('-password')
     res.status(200).json(users)
 }
 
+// one user
 module.exports.getSingleUser = (req, res) => {
-    console.log(req.params)
     if (!ObjectId.isValid(req.params.id))
         return res.status(400).json('id unknown :' + req.params.id)
 
     UserModel.findById(req.params.id, (err, docs) => {
-        if (!err) res.json(docs)
-        else console.log('id unknown', err)
+        if (!err) res.send(docs)
+        else console.log('id unknown :' + err)
     }).select('-password')
 }
 
+// edit bio
 module.exports.updateUser = (req, res) => {
     if (!ObjectId.isValid(req.params.id))
         return res.status(400).json('id unknown :' + req.params.id)
@@ -38,22 +40,9 @@ module.exports.updateUser = (req, res) => {
     } catch (err) {
         return res.status(500).json({ message: err })
     }
-    // } else {
-    //     UserModel(
-    //         {
-    //             $set: {
-    //                 bio: req.body.bio,
-    //             },
-    //         },
-    //         { new: true, upsert: true, setDefaultsOnInsert: true },
-    //         (err, docs) => {
-    //             if (!err) return res.json(docs)
-    //             if (err) return res.status(500).json({ message: err })
-    //         }
-    //     )
-    // }
 }
 
+// delete user
 module.exports.deleteUser = (req, res) => {
     if (!ObjectId.isValid(req.params.id))
         return res.status(400).json('id unknown :' + req.params.id)

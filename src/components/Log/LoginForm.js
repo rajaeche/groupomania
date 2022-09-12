@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useState } from 'react'
-// axios => client http basé sur les promesses (similaie à fetch)
 
+// login form
 function LoginForm() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -10,8 +10,6 @@ function LoginForm() {
 
     const handleLogin = (e) => {
         e.preventDefault()
-        // const emailError = document.querySelector('.email.error')
-        // const passwordError = document.querySelector('.password.error')
         axios({
             method: 'post',
             url: `http://localhost:5000/api/user/login`,
@@ -27,9 +25,6 @@ function LoginForm() {
                     console.log('if res data errors', res.data.errors)
                     setEmailErr(res.data.errors.email)
                     setPasswordErr(res.data.errors.password)
-                    // emailError.innerHTML = res.data.errors.email
-                    // passwordError.innerHTML = res.data.errors.password
-                    // useState => emailErr, setEmailErr
                 } else {
                     console.log('else')
                     window.location = '/'

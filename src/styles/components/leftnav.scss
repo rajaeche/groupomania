@@ -1,17 +1,24 @@
 .left-nav-container {
     position: relative;
-  
     .icons {
       position: fixed;
       z-index: 10;
   
       @media screen and(max-width: 590px) {
-        margin: 2px 0 0 -9px;
+        margin: 2px 0 0 20px;
       }
-  
       .icons-bis {
         position: absolute;
         left: 10px;
+        @media screen and(max-width: 590px) {
+          position: fixed;
+          bottom: 0px;
+          padding: 30px;
+          background-color: $white;
+          width: 100%;
+          display: flex;
+          justify-content: space-evenly;
+        }
   
         a {
           transition: 0.1s;

@@ -3,6 +3,7 @@ import {
     DELETE_POST,
     EDIT_COMMENT,
     GET_POSTS,
+    GET_USER_POSTS,
     LIKE_POST,
     UNLIKE_POST,
     UPDATE_POST,
@@ -14,8 +15,17 @@ export default function postReducer(state = initialState, action) {
     switch (action.type) {
         case GET_POSTS:
             return action.payload
-        case UPDATE_POST:
+        case GET_USER_POSTS:
             return action.payload
+        case UPDATE_POST:
+            return state.map((post) => {
+                if (post._id === action.payload.postId) {
+                    return {
+                        ...post,
+                        message: action.payload.message,
+                    }
+                } else return post
+            })
         case LIKE_POST:
             return state.map((post) => {
                 if (post._id === action.payload.postId) {

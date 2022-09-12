@@ -8,7 +8,6 @@ const CardComments = ({ post }) => {
     const [text, setText] = useState('')
     const userData = useSelector((state) => state.userReducer)
     const usersData = useSelector((state) => state.usersReducer)
-    console.log(usersData)
 
     const dispatch = useDispatch()
 

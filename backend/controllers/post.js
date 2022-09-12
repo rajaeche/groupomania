@@ -7,6 +7,7 @@ const fs = require('fs')
 const { promisify } = require('util')
 const pipeline = promisify(require('stream').pipeline)
 
+// posts
 module.exports.readPost = (req, res) => {
     // eslint-disable-next-line array-callback-return
     PostModel.find((err, docs) => {
@@ -15,6 +16,7 @@ module.exports.readPost = (req, res) => {
     }).sort({ createdAt: -1 })
 }
 
+// new post
 module.exports.createPost = async (req, res) => {
     let fileName
     if (req.file !== null) {
@@ -36,7 +38,7 @@ module.exports.createPost = async (req, res) => {
         await pipeline(
             req.file.stream,
             fs.createWriteStream(
-                `${__dirname}/../../public/uploads/post/${fileName}`
+                `${__dirname}/../../public/uploads/posts/${fileName}`
             )
         )
     }
@@ -44,7 +46,7 @@ module.exports.createPost = async (req, res) => {
     const newPost = new postModel({
         posterId: req.body.posterId,
         message: req.body.message,
-        picture: req.file !== null ? './uploads/post/' + fileName : '',
+        picture: req.file !== null ? './uploads/posts/' + fileName : '',
         video: req.body.video,
         likers: [],
         comments: [],
@@ -58,37 +60,50 @@ module.exports.createPost = async (req, res) => {
     }
 }
 
-// ajouter secu admin
-
-module.exports.updatePost = (req, res) => {
-    if (!ObjectID.isValid(req.params.id))
-        return res.status(400).send('ID unknown : ' + req.params.id)
-
-    const updatedRecord = {
-        message: req.body.message,
-    }
-
-    PostModel.findByIdAndUpdate(
-        req.params.id,
-        { $set: updatedRecord },
-        { new: true },
-        (err, docs) => {
-            if (!err) res.send(docs)
-            else console.log('Update error : ' + err)
+// edit post with admin access
+module.exports.updatePost = async (req, res) => {
+    try {
+        const updatedRecord = {
+            message: req.body.message,
         }
-    )
+        const post = await PostModel.findById(req.params.id)
+        const user = await UserModel.findOne({ _id: post.posterId })
+
+        if (post.posterId === user.id || user.admin === true) {
+            await post.updateOne(
+                { $set: updatedRecord },
+                { new: true },
+                (err, docs) => {
+                    if (!err) res.send(docs)
+                    else console.log('Update error : ' + err)
+                }
+            )
+        } else {
+            res.status(403).json('access denied')
+        }
+    } catch (err) {
+        res.status(500).json(err)
+    }
 }
 
-module.exports.deletePost = (req, res) => {
-    if (!ObjectID.isValid(req.params.id))
-        return res.status(400).send('ID unknown : ' + req.params.id)
+// delete post with admin access
+module.exports.deletePost = async (req, res) => {
+    try {
+        const post = await PostModel.findById(req.params.id)
+        const user = await UserModel.findOne(req.body)
 
-    PostModel.findByIdAndRemove(req.params.id, (err, docs) => {
-        if (!err) res.send(docs)
-        else console.log('Delete error : ' + err)
-    })
+        if (post.posterId === user.id || user.admin === true) {
+            await post.deleteOne()
+            res.status(200).json('Post has been deleted')
+        } else {
+            res.status(403).json('You can only delete your posts')
+        }
+    } catch (err) {
+        res.status(500).json(err)
+    }
 }
 
+// like post
 module.exports.likePost = (req, res) => {
     PostModel.findOne({
         _id: req.params.id,
@@ -129,59 +144,9 @@ module.exports.likePost = (req, res) => {
             )
         }
     })
-    // if (!ObjectID.isValid(req.params.id)) {
-    //     return console.log('error', req.params.id)
-    // } else {
-    //     // return console.log('valid id', req.params)
-
-    //     try {
-    //         await PostModel.findByIdAndUpdate(
-    //             req.params.id,
-    //             {
-    //                 $push: { likers: req.body.id },
-    //             },
-    //             { new: true }
-    //         )
-
-    //             // .then(() => {
-    //             //     if (req.body.id)
-    //             //         return PostModel.findByIdAndUpdate(
-    //             //             { _id: req.params.id },
-    //             //             { $inc: -1 },
-    //             //             {
-    //             //                 $pull: { likers: req.body.id },
-    //             //             },
-    //             //             { new: true }
-    //             //         )
-    //             // })
-    //             .then((data) => res.send(data))
-    //             .catch((err) => res.status(500).send({ message: err }))
-
-    //         await UserModel.findByIdAndUpdate(
-    //             req.body.id,
-    //             {
-    //                 $push: { likes: req.params.id },
-    //             },
-    //             { new: true }
-    //         )
-    //             // .then(() => {
-    //             //     if (req.body.id)
-    //             //         return UserModel.findByIdAndUpdate(
-    //             //             req.body.id,
-    //             //             {
-    //             //                 $pull: { likes: req.params.id },
-    //             //             },
-    //             //             { new: true }
-    //             //         )
-    //             // })
-    //             .then((data) => res.send(data))
-    //             .catch((err) => res.status(500).send({ message: err }))
-    //     } catch (err) {
-    //         return res.status(400).json({ message: err })
-    //     }
-    // }
 }
 
+// unlike post
 module.exports.unlikePost = async (req, res) => {
     PostModel.findOne({
         _id: req.params.id,
@@ -214,34 +179,9 @@ module.exports.unlikePost = async (req, res) => {
             )
         }
     })
-    //     if (!ObjectID.isValid(req.params.id))
-    //         return res.status(400).send('ID unknown : ' + req.params.id)
-
-    //     try {
-    //         await PostModel.findByIdAndUpdate(
-    //             req.params.id,
-    //             {
-    //                 $pull: { likers: req.body.id },
-    //             },
-    //             { new: true }
-    //         )
-    //             .then((data) => res.send(data))
-    //             .catch((err) => res.status(500).send({ message: err }))
-
-    //         await UserModel.findByIdAndUpdate(
-    //             req.body.id,
-    //             {
-    //                 $pull: { likes: req.params.id },
-    //             },
-    //             { new: true }
-    //         )
-    //             .then((data) => res.send(data))
-    //             .catch((err) => res.status(500).send({ message: err }))
-    //     } catch (err) {
-    //         return res.status(400).send(err)
-    //     }
 }
 
+// comments
 module.exports.commentPost = (req, res) => {
     if (!ObjectID.isValid(req.params.id))
         return res.status(400).send('ID unknown : ' + req.params.id)
@@ -268,6 +208,7 @@ module.exports.commentPost = (req, res) => {
     }
 }
 
+// edit comment by user
 module.exports.editCommentPost = (req, res) => {
     if (!ObjectID.isValid(req.params.id))
         return res.status(400).send('ID unknown : ' + req.params.id)
@@ -291,6 +232,7 @@ module.exports.editCommentPost = (req, res) => {
     }
 }
 
+// delete comment by user
 module.exports.deleteCommentPost = (req, res) => {
     if (!ObjectID.isValid(req.params.id))
         return res.status(400).send('ID unknown : ' + req.params.id)

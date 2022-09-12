@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+// user
 export const GET_USER = 'GET_USER'
 export const UPDATE_BIO = 'UPDATE_BIO'
 export const UPLOAD_PICTURE = 'UPLOAD_PICTURE'
@@ -7,11 +8,13 @@ export const UPLOAD_PICTURE = 'UPLOAD_PICTURE'
 // errors
 export const GET_USER_ERRORS = 'GET_USER_ERRORS'
 
-export const getUser = (_id) => {
+export const getUser = (id) => {
+    console.log(id)
     return (dispatch) => {
         return axios
-            .get(`http://localhost:5000/api/user/${_id}`)
+            .get(`http://localhost:5000/api/user/${id}`)
             .then((res) => {
+                console.log(res)
                 dispatch({ type: GET_USER, payload: res.data })
             })
             .catch((err) => console.log(err))
@@ -19,7 +22,6 @@ export const getUser = (_id) => {
 }
 
 export const updateBio = (userId, bio) => {
-    console.log('userId', userId)
     return (dispatch) => {
         return axios({
             method: 'put',

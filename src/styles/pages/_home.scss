@@ -1,14 +1,15 @@
+
 .home {
     display: grid;
-    max-width: 1200px;
+    max-width: 100%;
     grid-template-columns: 10% 80%;
     overflow: hidden;
-    margin-top: 50px;
+    margin-top: 20px;
     position: relative;
     
   
     @media screen and(max-width: 990px) {
-      grid-template-columns: 60px 1fr;
+      grid-column-end: 60px 1fr;
       margin: 58px 20px 50px
     }
   
@@ -20,6 +21,9 @@
     .main {
       width: 100%;
       margin: 40px;
+      @media screen and(max-width: 590px) {
+        margin: auto 10px;
+      }
       .home-header {
         margin: 0 auto 12px;
         text-align: center;

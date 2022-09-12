@@ -1,4 +1,4 @@
-import { GET_USER, UPDATE_BIO } from '../actions/user.action'
+import { GET_USER, UPDATE_BIO, UPLOAD_PICTURE } from '../actions/user.action'
 
 const initialState = {}
 
@@ -10,6 +10,11 @@ export default function userReducer(state = initialState, action) {
             return {
                 ...state,
                 bio: action.payload,
+            }
+        case UPLOAD_PICTURE:
+            return {
+                ...state,
+                picture: action.payload,
             }
         default:
             return state

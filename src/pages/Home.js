@@ -8,20 +8,23 @@ import NewPostForm from '../components/Post/NewPostForm'
 const Home = () => {
     const uid = useContext(UidContext)
     return (
-        <section className="home">
-            {uid ? (
-                <>
-                    <LeftNav />
-                    <div className="main">
-                        <div className="home-header">
-                            <NewPostForm />
+        <section>
+            <h1 className="homepage">Homepage</h1>
+            <div className="home">
+                {uid ? (
+                    <>
+                        <LeftNav />
+                        <div className="main">
+                            <div className="home-header">
+                                <NewPostForm />
+                            </div>
+                            <Thread />
                         </div>
-                        <Thread />
-                    </div>
-                </>
-            ) : (
-                <Profil />
-            )}
+                    </>
+                ) : (
+                    <Profil />
+                )}
+            </div>
         </section>
     )
 }

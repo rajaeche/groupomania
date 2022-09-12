@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const UserModel = require('../models/User')
 
+// to check user token
 module.exports.checkUser = (req, res, next) => {
     const token = req.cookies.jwt
     if (token) {
@@ -25,8 +26,7 @@ module.exports.checkUser = (req, res, next) => {
     }
 }
 
-// locals: info de user qui transitent. si il n'y a pas de token les locals ne sont pas transmises
-
+// check if token
 module.exports.requireAuth = (req, res, next) => {
     const token = req.cookies.jwt
     if (token) {

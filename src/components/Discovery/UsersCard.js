@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux/es/exports'
 import { isEmpty } from '../Utils'
 
+// users cards
 const UsersCard = ({ user }) => {
     const [isLoading, setIsLoading] = useState(true)
     const usersData = useSelector((state) => state.usersReducer)

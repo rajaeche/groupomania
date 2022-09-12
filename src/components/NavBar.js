@@ -26,7 +26,7 @@ const NavBar = () => {
                             <NavLink to="/profil">
                                 {userData.admin ? (
                                     <>
-                                        <h5>Mode Administrateur </h5>
+                                        <p>Mode Administrateur </p>
                                         <img
                                             src={userData.picture}
                                             alt="user-pic"

@@ -3,6 +3,7 @@ import axios from 'axios'
 //post
 export const GET_POSTS = 'GET_POSTS'
 export const GET_ALL_POSTS = 'GET_ALL_POSTS'
+export const GET_USER_POSTS = 'GET_USER_POSTS'
 export const ADD_POST = 'ADD_POST'
 export const UPDATE_POST = 'UPDATE_POST'
 export const DELETE_POST = 'DELETE_POST'
@@ -29,6 +30,11 @@ export const getPosts = (num) => {
             .catch((err) => console.log(err))
     }
 }
+export const getUserPosts = (sortedArray) => {
+    return (dispatch) => {
+        dispatch({ type: GET_USER_POSTS, payload: { sortedArray } })
+    }
+}
 
 export const addPost = (data) => {
     return (dispatch) => {
@@ -48,6 +54,7 @@ export const addPost = (data) => {
 }
 
 export const updatePost = (postId, message) => {
+    console.log('postId', postId)
     return (dispatch) => {
         return axios({
             method: 'put',
