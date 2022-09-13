@@ -36,7 +36,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cookieParser())
 
-// jwt=> toutes les routes sont controllés par une auth jwt
+// jwt=> toutes les routes sont controllées par une auth jwt
 app.get('*', checkUser)
 app.get('/jwtid', requireAuth)
 

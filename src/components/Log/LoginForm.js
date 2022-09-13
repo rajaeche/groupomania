@@ -20,9 +20,7 @@ function LoginForm() {
             },
         })
             .then((res) => {
-                console.log('res', res)
                 if (res.data.errors) {
-                    console.log('if res data errors', res.data.errors)
                     setEmailErr(res.data.errors.email)
                     setPasswordErr(res.data.errors.password)
                 } else {

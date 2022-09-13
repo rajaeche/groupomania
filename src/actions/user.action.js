@@ -9,12 +9,12 @@ export const UPLOAD_PICTURE = 'UPLOAD_PICTURE'
 export const GET_USER_ERRORS = 'GET_USER_ERRORS'
 
 export const getUser = (id) => {
-    console.log(id)
     return (dispatch) => {
-        return axios
-            .get(`http://localhost:5000/api/user/${id}`)
+        return axios({
+            method: 'get',
+            url: `http://localhost:5000/api/user/` + id,
+        })
             .then((res) => {
-                console.log(res)
                 dispatch({ type: GET_USER, payload: res.data })
             })
             .catch((err) => console.log(err))

@@ -1,35 +1,68 @@
-.discovery{
+.discovery {
     display: grid;
     max-width: 1200px;
     grid-template-columns: 10% 80%;
     overflow: hidden;
     margin-top: 50px;
     position: relative;
-    .discovery-container{
-        ul{
+
+    @media screen and(max-width: 590px) {
+        width: 100%;
+        margin-bottom: 150px;
+    }
+
+    .discovery-container {
+        ul {
             display: flex;
             flex-flow: row;
             align-items: center;
             justify-content: flex-start;
             flex-wrap: wrap;
         }
-        .card-container{
+
+        .card-container-discovery {
             display: grid;
-    grid-template-columns: 66px 1fr;
-    width: 400px;
-    border: 2px solid $main-light;
-    margin: 10px;
-    padding: 16px;
-    border-radius: 20px;
-    margin: 8px auto;
-    position: relative;
-    min-height: 100px;
-    background-color: $main-lighter;
-    .card-header{
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-    }
+            grid-template-columns: 66px 1fr;
+            width: 400px;
+            border: 2px solid $main-light;
+            margin: 10px;
+            padding: 16px;
+            border-radius: 20px;
+            margin: 8px auto;
+            position: relative;
+            min-height: 100px;
+            background-color: $main-lighter;
+
+            .card-left {
+                img {
+                    height: 52px;
+                    width: 52px;
+                    border-radius: 20px;
+                    box-shadow: 1px 1px 3px rgba(51, 51, 51, 0.192);
+                    object-fit: cover;
+
+                    @media screen and(max-width: 590px) {
+                        height: 40px;
+                        width: 40px;
+                        margin-left: 18px;
+                        border-radius: 14px;
+                    }
+                }
+
+            }
+
+            .card-right {
+                .card-header {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+
+                    .bio {
+                        display: flex;
+                        font-style: italic;
+                    }
+                }
+            }
         }
     }
 }

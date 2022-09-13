@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import LeftNav from '../LeftNav'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateBio } from '../../actions/user.action'
 import { UploadImg } from './UploadImg'
@@ -17,9 +16,7 @@ const UpadeteProfil = () => {
 
     return (
         <>
-            <LeftNav />
             <article className="profil-container">
-                <h1>Profil de {userData.pseudo}</h1>
                 <div className="update-container">
                     <div className="left-part">
                         <h3>Photo de profil</h3>

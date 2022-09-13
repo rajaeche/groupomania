@@ -9,23 +9,27 @@ function Discovery() {
     const usersData = useSelector((state) => state.usersReducer)
     const uid = useContext(UidContext)
     return (
-        <div className="discovery">
+        <section>
+            <h1>Les utilisateurs de Groupomania</h1>
             {uid ? (
                 <>
-                    <LeftNav />
-                    <div className="discovery-container">
-                        <h1>Les utilisateurs de Groupomania</h1>
-                        <ul>
-                            {usersData.map((user) => {
-                                return <UsersCard user={user} key={user._id} />
-                            })}
-                        </ul>
+                    <div className="discovery">
+                        <LeftNav />
+                        <div className="discovery-container">
+                            <ul>
+                                {usersData.map((user) => {
+                                    return (
+                                        <UsersCard user={user} key={user._id} />
+                                    )
+                                })}
+                            </ul>
+                        </div>
                     </div>
                 </>
             ) : (
                 <Profil />
             )}
-        </div>
+        </section>
     )
 }
 

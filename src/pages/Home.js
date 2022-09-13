@@ -9,10 +9,10 @@ const Home = () => {
     const uid = useContext(UidContext)
     return (
         <section>
-            <h1 className="homepage">Homepage</h1>
-            <div className="home">
-                {uid ? (
-                    <>
+            {uid ? (
+                <>
+                    <h1 className="homepage">Homepage</h1>
+                    <div className="home">
                         <LeftNav />
                         <div className="main">
                             <div className="home-header">
@@ -20,11 +20,11 @@ const Home = () => {
                             </div>
                             <Thread />
                         </div>
-                    </>
-                ) : (
-                    <Profil />
-                )}
-            </div>
+                    </div>
+                </>
+            ) : (
+                <Profil />
+            )}
         </section>
     )
 }

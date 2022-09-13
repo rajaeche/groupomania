@@ -12,7 +12,7 @@ const UsersCard = ({ user }) => {
     }, [usersData])
 
     return (
-        <li className="card-container" key={user._id}>
+        <li className="card-container-discovery" key={user._id}>
             {isLoading ? (
                 <i className="fas fa-spinner fa-spin"></i>
             ) : (
@@ -25,9 +25,7 @@ const UsersCard = ({ user }) => {
                             <div className="pseudo">
                                 <h5> {user.pseudo}</h5>
                             </div>
-                            <div className="bio">
-                                <p>{user.bio}</p>
-                            </div>
+                            <span className="bio">{user.bio}</span>
                         </div>
                     </div>
                 </>
