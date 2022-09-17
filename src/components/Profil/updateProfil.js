@@ -12,6 +12,7 @@ const UpadeteProfil = () => {
     const handleUpdate = () => {
         dispatch(updateBio(userData._id, bio))
         setUpdateForm(false)
+        window.location = '/profil'
     }
 
     return (

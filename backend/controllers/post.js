@@ -87,20 +87,34 @@ module.exports.updatePost = async (req, res) => {
 }
 
 // delete post with admin access
-module.exports.deletePost = async (req, res) => {
-    try {
-        const post = await PostModel.findById(req.params.id)
-        const user = await UserModel.findOne(req.body)
+// module.exports.deletePost = async (req, res) => {
+//     try {
+//         const post = await PostModel.findById(req.params.id)
+//         const user = await UserModel.findOne(req.body)
 
-        if (post.posterId === user.id || user.admin === true) {
-            await post.deleteOne()
-            res.status(200).json('Post has been deleted')
-        } else {
-            res.status(403).json('You can only delete your posts')
-        }
-    } catch (err) {
-        res.status(500).json(err)
-    }
+//         if (post.posterId === user.id || user.admin === true) {
+//             await post.deleteOne()
+//             res.status(200).json('Post has been deleted')
+//         } else {
+//             res.status(403).json('You can only delete your posts')
+//         }
+//     } catch (err) {
+//         res.status(500).json(err)
+//     }
+// }
+
+module.exports.deletePost = (req, res) => {
+    if (!ObjectID.isValid(req.params.id))
+        return res.status(400).send('ID unknown : ' + req.params.id)
+
+    const post = PostModel.findById(req.params.id)
+    const user = UserModel.findOne(req.body)
+
+    PostModel.findByIdAndRemove(req.params.id, (err, docs) => {
+        if (!err && (post.posterId === user.id || user.admin === true))
+            res.send(docs)
+        else console.log('Delete error : ' + err)
+    })
 }
 
 // like post

@@ -8,28 +8,12 @@ export const UPLOAD_PICTURE = 'UPLOAD_PICTURE'
 // errors
 export const GET_USER_ERRORS = 'GET_USER_ERRORS'
 
-export const getUser = (id) => {
+export const getUser = (uid) => {
     return (dispatch) => {
-        return axios({
-            method: 'get',
-            url: `http://localhost:5000/api/user/` + id,
-        })
+        return axios
+            .get(`http://localhost:5000/api/user/${uid}`)
             .then((res) => {
                 dispatch({ type: GET_USER, payload: res.data })
-            })
-            .catch((err) => console.log(err))
-    }
-}
-
-export const updateBio = (userId, bio) => {
-    return (dispatch) => {
-        return axios({
-            method: 'put',
-            url: `http://localhost:5000/api/user/` + userId,
-            data: { bio },
-        })
-            .then((res) => {
-                dispatch({ type: UPDATE_BIO, payload: bio })
             })
             .catch((err) => console.log(err))
     }
@@ -47,19 +31,30 @@ export const uploadPicture = (data, id) => {
                     })
                 } else {
                     dispatch({ type: GET_USER_ERRORS, payload: '' })
-                }
-                return axios
-                    .get(`http://localhost:5000/api/user/${id}`)
-                    .then((res) => {
-                        dispatch({
-                            type: UPLOAD_PICTURE,
-                            payload: res.data.picture,
+                    return axios
+                        .get(`http://localhost:5000/api/user/${id}`)
+                        .then((res) => {
+                            dispatch({
+                                type: UPLOAD_PICTURE,
+                                payload: res.data.picture,
+                            })
                         })
-                    })
-                    .then(console.log('res upload pic', res))
+                }
             })
-            .catch((err) => {
-                console.log(err)
+            .catch((err) => console.log(err))
+    }
+}
+
+export const updateBio = (userId, bio) => {
+    return (dispatch) => {
+        return axios({
+            method: 'put',
+            url: `http://localhost:5000/api/user/` + userId,
+            data: { bio },
+        })
+            .then((res) => {
+                dispatch({ type: UPDATE_BIO, payload: bio })
             })
+            .catch((err) => console.log(err))
     }
 }

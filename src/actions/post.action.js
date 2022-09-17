@@ -54,7 +54,6 @@ export const addPost = (data) => {
 }
 
 export const updatePost = (postId, message) => {
-    console.log('postId', postId)
     return (dispatch) => {
         return axios({
             method: 'put',
